@@ -10,9 +10,25 @@ Monaco 内置的高亮器没有使用完整的 TextMate 语法，所以它可能
 
 ## 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/monaco
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/monaco
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/monaco
+```
+
+```sh [bun]
+bun add -D @shikijs/monaco
+```
+
+:::
 
 ```ts
 import { shikiToMonaco } from '@shikijs/monaco'

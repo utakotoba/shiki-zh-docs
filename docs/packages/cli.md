@@ -16,9 +16,27 @@ npx @shikijs/cli README.md
 
 你可以将它全局安装，命令别名有 `@shikijs/cli`、`shiki` 和 `skat`。
 
-```bash
-npm i -g @shikijs/cli
+::: code-group
 
+```sh [npm]
+npm i -g @shikijs/cli
+```
+
+```sh [yarn]
+yarn global add @shikijs/cli
+```
+
+```sh [pnpm]
+pnpm add -g @shikijs/cli
+```
+
+```sh [bun]
+bun add -g @shikijs/cli
+```
+
+:::
+
+```sh
 skat src/index.ts
 ```
 

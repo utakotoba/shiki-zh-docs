@@ -10,9 +10,25 @@ outline: deep
 
 ## 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/transformers
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/transformers
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/transformers
+```
+
+```sh [bun]
+bun add -D @shikijs/transformers
+```
+
+:::
 
 ## 使用方法
 
@@ -40,6 +56,44 @@ const html = await codeToHtml(code, {
 ## 无样式
 
 转换器只应用到类，并不带有样式，你可以提供自己的 CSS 规则来样式化它们。
+
+## 匹配算法
+
+我们发现 v1 中用于匹配注释的算法有时会违反直觉，我们正在以渐进的方式修复它。自 v1.29.0 起，我们为大多数转换器引入了一个新的 `matchAlgorithm` 选项，允许你在不同的匹配算法之间切换。目前，默认值是 `v1`，即旧算法，而 `v3` 是新算法。当 Shiki v3 发布时，默认值将是 `v3`。
+
+```ts
+const html = await codeToHtml(code, {
+  lang: 'ts',
+  theme: 'nord',
+  transformers: [
+    transformerNotationDiff({
+      matchAlgorithm: 'v3', // [!code hl]
+    }),
+  ],
+})
+```
+
+### `matchAlgorithm: 'v1'`
+
+匹配算法主要影响单行注释的匹配，在 `v1` 中，它会将注释行计为第一行，而在 `v3` 中，它将从注释行开始计数：
+
+```ts
+// [\!code highlight:3]
+console.log('highlighted') // [!code hl]
+console.log('highlighted') // [!code hl]
+console.log('not highlighted')
+```
+
+### `matchAlgorithm: 'v3'`
+
+在 `v3` 中，匹配算法将从注释行下面的行开始计数：
+
+```ts
+// [\!code highlight:2]
+console.log('highlighted') // [!code hl]
+console.log('highlighted') // [!code hl]
+console.log('not highlighted')
+```
 
 ## 转换器
 

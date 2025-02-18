@@ -1,10 +1,10 @@
 import type { DefaultTheme } from 'vitepress'
+import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
+import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '@shikijs/transformers'
 import { bundledThemes } from 'shiki'
 import { defineConfig } from 'vitepress'
+import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { withMermaid } from 'vitepress-plugin-mermaid'
-import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '@shikijs/transformers'
-import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
-import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import { version } from '../../package.json'
 import vite from './vite.config'
 
@@ -13,14 +13,16 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: '安装', link: '/guide/install' },
   { text: '捆绑包', link: '/guide/bundles' },
   { text: '深浅色模式', link: '/guide/dual-themes' },
+  { text: '简写', link: '/guide/shorthands' },
+  { text: '最佳性能实践', link: '/guide/best-performance' },
   { text: '代码装饰', link: '/guide/decorations' },
   { text: '转换器', link: '/guide/transformers' },
   { text: '主题颜色控制', link: '/guide/theme-colors' },
   { text: '正则引擎', link: '/guide/regex-engines' },
   { text: '同步使用方法', link: '/guide/sync-usage' },
+  { text: '语法状态', link: '/guide/grammar-state' },
   { text: '自定义主题', link: '/guide/load-theme' },
   { text: '自定义语言', link: '/guide/load-lang' },
-  { text: '未来', link: '/guide/future' },
   { text: '迁移', link: '/guide/migrate' },
   { text: '兼容性构建', link: '/guide/compat' },
 ]
@@ -42,7 +44,14 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Astro', link: '/packages/astro' },
   { text: '常用转换器', link: '/packages/transformers' },
   { text: '括号着色', link: '/packages/colorized-brackets' },
+  { text: '代码生成', link: '/packages/codegen' },
   { text: 'CLI', link: '/packages/cli' },
+]
+
+const BLOGS: DefaultTheme.NavItemWithLink[] = [
+  { text: 'Shiki v3.0', link: '/blog/v3' },
+  { text: 'Shiki v2.0', link: '/blog/v2' },
+  { text: 'The Evolution of Shiki v1.0', link: 'https://nuxt.com/blog/shiki-v1' },
 ]
 
 const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] = [
@@ -51,6 +60,7 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   { text: `贡献`, link: 'https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md' },
   {
     items: [
+      { text: '从 v1.0 迁移', link: '/blog/v2' },
       { text: '从 v0.14 迁移', link: '/guide/migrate#migrate-from-v0-14' },
       { text: '从 Shikiji 迁移', link: '/guide/migrate#migrate-from-shikiji' },
     ],
@@ -72,7 +82,9 @@ export default withMermaid(defineConfig({
     },
     codeTransformers: [
       transformerMetaWordHighlight(),
-      transformerNotationWordHighlight(),
+      transformerNotationWordHighlight({
+        matchAlgorithm: 'v3',
+      }),
       {
         // Render custom themes with codeblocks
         name: 'shiki:inline-theme',
@@ -130,8 +142,11 @@ export default withMermaid(defineConfig({
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
     ],
+    // languages: ['js', 'jsx', 'ts', 'tsx'],
+    config: (md) => {
+      md.use(groupIconMdPlugin)
+    },
   },
-
   cleanUrls: true,
   vite,
   themeConfig: {
@@ -153,10 +168,10 @@ export default withMermaid(defineConfig({
         text: '参考',
         items: REFERENCES,
       },
-      // {
-      //   text: 'Play',
-      //   link: '/play',
-      // },
+      {
+        text: '博客',
+        items: BLOGS,
+      },
       {
         text: `v${version}`,
         items: VERSIONS,
@@ -209,6 +224,7 @@ export default withMermaid(defineConfig({
     },
 
     socialLinks: [
+      { icon: 'bluesky', link: 'https://bsky.app/profile/shiki.style' },
       { icon: 'github', link: 'https://github.com/shikijs/shiki' },
     ],
 

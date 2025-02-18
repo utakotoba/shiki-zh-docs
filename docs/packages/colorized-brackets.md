@@ -6,9 +6,25 @@
 
 ## 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/colorized-brackets
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/colorized-brackets
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/colorized-brackets
+```
+
+```sh [bun]
+bun add -D @shikijs/colorized-brackets
+```
+
+:::
 
 ## 使用方法
 

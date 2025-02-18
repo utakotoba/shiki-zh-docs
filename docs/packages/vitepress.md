@@ -16,14 +16,29 @@ VitePress 提供了 [一些 Shiki 的自定义选项](https://github.com/vuejs/v
 
 ### 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/vitepress-twoslash
 ```
 
+```sh [yarn]
+yarn add -D @shikijs/vitepress-twoslash
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/vitepress-twoslash
+```
+
+```sh [bun]
+bun add -D @shikijs/vitepress-twoslash
+```
+
+:::
+
 在 [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config) 配置文件中：
 
-```ts twoslash
-// .vitepress/config.ts
+```ts [.vitepress/config.ts]
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash' // [!code hl]
 import { defineConfig } from 'vitepress'
 
@@ -31,17 +46,19 @@ export default defineConfig({
   markdown: {
     codeTransformers: [
       transformerTwoslash() // [!code hl]
-    ]
+    ],
+    // [!code hl:2]
+    // Explicitly load these languages for types hightlighting
+    languages: ['js', 'jsx', 'ts', 'tsx']
   }
 })
 ```
 
 然后在你的 [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custom-theme) 中，安装 Vue 插件并通过 `vitepress-plugin-twoslash/styles.css` 导入 CSS。
 
-```ts twoslash
+```ts [.vitepress/theme/index.ts]
 import type { EnhanceAppContext } from 'vitepress' // [!code hl]
 // @noErrors: true
-// .vitepress/theme/index.ts
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import Theme from 'vitepress/theme'
 
@@ -124,8 +141,7 @@ onMounted(() => {
 
 在你的 [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config) 文件中：
 
-```ts
-// .vitepress/config.ts
+```ts [.vitepress/config.ts]
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs' // [!code hl]
 import { defineConfig } from 'vitepress'

@@ -6,6 +6,10 @@ outline: deep
 
 主要的 `shiki` 包入点通过动态导入捆绑了所有支持的主题和语言。大多数情况下，效率应该不成问题，因为语法只有在需要时才会被导入或下载。然而，当你将 shiki 捆绑到浏览器运行时或 Web Worker 中时，即使这些文件没有被导入，它们仍然会增加你的分发大小。我们提供了 [细粒度捆绑](#细粒度捆绑) 以帮助你根据需要逐个组合语言和主题。
 
+::: info
+如果你正在构建一个 Web 应用程序，或者在对性能敏感的环境中，最好始终使用[细粒度捆绑](#细粒度捆绑)来减小 bundle 大小和内存使用量。了解更多关于[最佳性能实践](/guide/best-performance)的信息。
+:::
+
 # 捆绑包预设
 
 方便起见，我们还提供了一些预制的捆绑包供你使用。
@@ -51,11 +55,11 @@ import nord from '@shikijs/themes/nord'
 import { createHighlighterCore } from 'shiki/core'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
-// `shiki/wasm` 包含以 BASE64 字符串内联的 WASM 二进制文件
-import getWasm from 'shiki/wasm'
-
 // 直接导入需要的主题和语言模块，只有导入的模块会被捆绑
 import nord from 'shiki/themes/nord.mjs'
+
+// `shiki/wasm` 包含以 BASE64 字符串内联的 WASM 二进制文件
+import getWasm from 'shiki/wasm'
 
 const highlighter = await createHighlighterCore({
   themes: [

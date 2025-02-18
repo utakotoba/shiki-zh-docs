@@ -12,9 +12,25 @@ outline: deep
 
 ## 安装
 
-```bash
-npm i -D @shikijs/twoslash
+::: code-group
+
+```sh [npm]
+npm install -D @shikijs/twoslash
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/twoslash
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/twoslash
+```
+
+```sh [bun]
+bun add -D @shikijs/twoslash
+```
+
+:::
 
 这个包是 shiki 的一个**转换器插件**，这意味着对于每个支持传递 shiki 转换器的集成，你都可以使用此包。
 
@@ -93,8 +109,12 @@ Number.parseInt('123', 10)
 
 ```ts twoslash
 import { createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 
-const highlighter = await createHighlighterCore({})
+const highlighter = await createHighlighterCore({
+  engine: createJavaScriptRegexEngine()
+})
+
 // @log: 自定义日志信息
 const a = 1
 // @error: 自定义错误信息

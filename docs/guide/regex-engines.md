@@ -84,3 +84,37 @@ const jsEngine = createJavaScriptRegexEngine({
   target: 'ES2018', // or 'auto' (default), 'ES2024', 'ES2025'
 })
 ```
+
+### 预编译语言
+
+除了即时编译正则表达式之外，我们还为 JavaScript 引擎提供预编译语言，以进一步减少启动时间。
+
+::: info
+预编译语言需要支持 RegExp UnicodeSets（`v` 标志），这需要 **ES2024** 或 Node.js 20+，并且可能无法在旧环境中工作。[Can I use](https://caniuse.com/mdn-javascript_builtins_regexp_unicodesets)。
+:::
+
+你可以使用 `@shikijs/langs-precompiled` 安装它们，并将你的 `@shikijs/langs` 导入更改为 `@shikijs/langs-precompiled`：
+
+```ts
+import { createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRawEngine } from 'shiki/engine/javascript'
+
+const highlighter = await createHighlighterCore({
+  langs: [
+    import('@shikijs/langs/javascript'), // [!code --]
+    import('@shikijs/langs/typescript'), // [!code --]
+    import('@shikijs/langs-precompiled/javascript'), // [!code ++]
+    import('@shikijs/langs-precompiled/typescript'), // [!code ++]
+    // ...
+  ],
+  themes: [
+    import('@shikijs/themes/nord'),
+  ],
+  engine: createJavaScriptRegexEngine(), // [!code --]
+  engine: createJavaScriptRawEngine(), // [!code ++]
+})
+```
+
+如果你没有使用需要转换的自定义语法，则可以使用 `createJavaScriptRawEngine` 跳过转换步骤，从而进一步减小 bundle 大小。
+
+如果你正在使用 [`shiki-codegen`](/packages/codegen)，则可以使用 `--precompiled` 和 `--engine=javascript-raw` 标志生成预编译语言。

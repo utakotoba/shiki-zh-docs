@@ -10,9 +10,25 @@ outline: deep
 
 ## 安装
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/rehype
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/rehype
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/rehype
+```
+
+```sh [bun]
+bun add -D @shikijs/rehype
+```
+
+:::
 
 ## 使用方法
 
@@ -56,10 +72,10 @@ import { unified } from 'unified'
 
 const highlighter = await createHighlighterCore({
   themes: [
-    import('shiki/themes/vitesse-light.mjs')
+    import('@shikijs/themes/vitesse-light.mjs')
   ],
   langs: [
-    import('shiki/langs/javascript.mjs'),
+    import('@shikijs/langs/javascript.mjs'),
   ],
   loadWasm: import('shiki/wasm')
 })

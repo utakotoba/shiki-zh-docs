@@ -1,9 +1,9 @@
+import type { EnhanceAppContext } from 'vitepress'
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import { createPinia } from 'pinia'
 // https://vitepress.dev/guide/custom-theme
 import Theme from 'vitepress/theme'
-import type { EnhanceAppContext } from 'vitepress'
-import { createPinia } from 'pinia'
 import { h } from 'vue'
-import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 
 import '@shikijs/twoslash/style-rich.css'
 import 'floating-vue/dist/style.css'
@@ -11,6 +11,7 @@ import '@shikijs/vitepress-twoslash/style.css'
 import 'uno.css'
 import './style.css'
 import './transformers.css'
+import 'virtual:group-icons.css'
 
 // @unocss-include
 
