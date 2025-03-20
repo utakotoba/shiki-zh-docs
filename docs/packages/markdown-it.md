@@ -71,7 +71,7 @@ md.use(fromHighlighter(highlighter, { /* options */ }))
 
 Shiki 的 [shorthands](/guide/shorthands) 提供按需加载主题和语言的功能，但也使高亮过程变为异步。不幸的是，`markdown-it` 本身[不支持异步高亮](https://github.com/markdown-it/markdown-it/blob/master/docs/development.md#i-need-async-rule-how-to-do-it)。
 
-为了解决这个问题，你可以使用 [Anthony Fu](https://github.com/antfu) 的 [`markdown-it-async`](<[https://github.com/antfu/markdown-it-async](https://github.com/antfu/markdown-it-async)>)。Shiki 也提供了与它的集成，你可以从 `@shikijs/markdown-it/async` 导入 `fromAsyncCodeToHtml`。
+为了解决这个问题，你可以使用 [Anthony Fu](https://github.com/antfu) 的 [`markdown-it-async`](https://github.com/antfu/markdown-it-async)。Shiki 也提供了与它的集成，你可以从 `@shikijs/markdown-it/async` 导入 `fromAsyncCodeToHtml`。
 
 ````ts twoslash
 import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
