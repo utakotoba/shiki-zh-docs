@@ -35,7 +35,7 @@ const shiki = await createShiki({
 })
 ```
 
-## JavaScript 正则表达式引擎（实验性）
+## JavaScript 正则表达式引擎
 
 这个实验性引擎使用 JavaScript 的原生 `RegExp`。由于 TextMate 语法的正则表达式是基于 Oniguruma 语法风格，可能包含 JavaScript `RegExp` 不支持的语法，因此我们使用 [`oniguruma-to-js`](https://github.com/antfu/oniguruma-to-js) 来简化语法并尝试使其与 JavaScript 的正则表达式兼容。
 
@@ -58,7 +58,11 @@ const html = shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord'
 
 尽管 JavaScript 引擎对 Oniguruma 的模拟非常强大，但在某些边缘情况中，无法保证高亮效果完全相同。此外，还有少数语法不受支持。
 
-请查看[兼容性表](/references/engine-js-compat)以了解您使用的语言的支持状态。
+请查看[兼容性表](/references/engine-js-compat)以了解您使用的语言的支持状态。大部分语言都是受支持的。
+
+::: info
+JavaScript 引擎在浏览器环境中运行以及需要控制包大小时表现最佳。如果你在 Node.js 环境下（或构建时）运行 Shiki，并且不关心包大小或 WebAssembly 支持，那么 Oniguruma 引擎能确保最大程度的语言兼容性。
+:::
 
 JavaScript 引擎默认是严格模式，如果遇到无法转换的模式会抛出错误。如果可以接受匹配不完全，并希望对不支持的语法提供尽力而为的结果，可以启用 `forgiving` 选项以抑制任何转换错误：
 
@@ -67,11 +71,7 @@ const jsEngine = createJavaScriptRegexEngine({ forgiving: true })
 // ...使用该引擎
 ```
 
-::: info
-如果你在 Node.js 上运行 Shiki（或在构建时运行），且对包大小或 WebAssembly 的支持没有顾虑，我们仍然推荐使用 Oniguruma 引擎以获得最佳效果。
-
-JavaScript 引擎更适合在某些情况下在浏览器中运行，特别是在您希望控制包大小时。
-:::
+请你注意，使用这个选项的时候可能会导致语法高亮的错误匹配。
 
 ### JavaScript 运行时目标
 
@@ -88,6 +88,10 @@ const jsEngine = createJavaScriptRegexEngine({
 ### 预编译语言
 
 除了即时编译正则表达式之外，我们还为 JavaScript 引擎提供预编译语言，以进一步减少启动时间。
+
+::: warning
+由于一个影响许多语言的[已知问题](https://github.com/shikijs/shiki/issues/918)，预编译语言暂不受支持。请谨慎使用。
+:::
 
 ::: info
 预编译语言需要支持 RegExp UnicodeSets（`v` 标志），这需要 **ES2024** 或 Node.js 20+，并且可能无法在旧环境中工作。[Can I use](https://caniuse.com/mdn-javascript_builtins_regexp_unicodesets)。

@@ -57,9 +57,9 @@ export default defineConfig({
 然后在你的 [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custom-theme) 中，安装 Vue 插件并通过 `vitepress-plugin-twoslash/styles.css` 导入 CSS。
 
 ```ts [.vitepress/theme/index.ts]
-import type { EnhanceAppContext } from 'vitepress' // [!code hl]
 // @noErrors: true
-import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import type { EnhanceAppContext } from 'vitepress'
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client' // [!code hl]
 import Theme from 'vitepress/theme'
 
 import '@shikijs/vitepress-twoslash/style.css' // [!code hl]

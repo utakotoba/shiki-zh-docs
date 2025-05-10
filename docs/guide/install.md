@@ -220,9 +220,9 @@ async function main() {
 
   <script type="module">
     // 指定确切的版本号
-    import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
+    import { codeToHtml } from 'https://esm.sh/shiki@3.0.0'
     // 或
-    // import { codeToHtml } from 'https://esm.run/shiki@1.0.0'
+    // import { codeToHtml } from 'https://esm.run/shiki@3.0.0'
 
     const foo = document.getElementById('foo')
     foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', {

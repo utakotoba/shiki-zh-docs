@@ -60,6 +60,7 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   { text: `贡献`, link: 'https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md' },
   {
     items: [
+      { text: '从 v2.0 迁移', link: '/blog/v3' },
       { text: '从 v1.0 迁移', link: '/blog/v2' },
       { text: '从 v0.14 迁移', link: '/guide/migrate#migrate-from-v0-14' },
       { text: '从 Shikiji 迁移', link: '/guide/migrate#migrate-from-shikiji' },

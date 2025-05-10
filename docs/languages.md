@@ -32,22 +32,14 @@ const html = codeToHtml('console.log("Hello World")', {
 特殊的处理语言 `ansi` 可以用来突出显示终端输出。例如：
 
 ```ansi
-[0;90m┌[0m  [0;36;1mWelcome to VitePress![0m[0m
-[0;90m│[0m[0m
-[0;32m◇[0m  Where should VitePress initialize the config?[0m
-[0;90m│[0m  [0;2m./docs[0m[0m
-[0;90m│[0m[0m
-[0;32m◇[0m  Site title:[0m
-[0;90m│[0m  [0;2mMy Awesome Project[0m[0m
-[0;90m│[0m[0m
-[0;32m◇[0m  Site description:[0m
-[0;90m│[0m  [0;2mA VitePress Site[0m[0m
-[0;90m│[0m[0m
-[0;36m◆[0m  Theme:[0m
-[0;36m│[0m  [0;32m●[0m Default Theme [0;2m(Out of the box, good-looking docs)[0m[0m
-[0;36m│[0m  [0;2m○[0m [0;2mDefault Theme + Customization[0m[0m
-[0;36m│[0m  [0;2m○[0m [0;2mCustom Theme[0m[0m
-[0;36m└[0m
+[0;32mcolored foreground[0m
+[0;42mcolored background[0m
+[0;1mbold text[0m
+[0;2mdimmed text[0m
+[0;4munderlined text[0m
+[0;7mreversed text[0m
+[0;9mstrikethrough text[0m
+[0;4;9munderlined + strikethrough text[0m
 ```
 
 查看 [上述代码片段的原始 Markdown](https://github.com/shikijs/shiki/blob/main/docs/languages.md?plain=1#L35)。
